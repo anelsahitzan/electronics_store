@@ -20,11 +20,11 @@ export const AuthModal: React.FC = () => {
   };
 
   const handleQuickAdminLogin = () => {
-    login('admin@techmarket.kz', 'ADMIN', 'Lawliet (Главный Администратор)');
+    login('admin@anelimarket.kz', 'ADMIN', 'Lawliet (Главный Администратор)');
   };
 
   const handleQuickUserLogin = () => {
-    login('customer@techmarket.kz', 'USER', 'Анель Нургалиева');
+    login('customer@anelimarket.kz', 'USER', 'Анель Нургалиева');
   };
 
   return (
@@ -44,7 +44,7 @@ export const AuthModal: React.FC = () => {
             <UserIcon size={24} />
           </div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            {isRegister ? 'Создать аккаунт' : 'Вход в TechMarket'}
+            {isRegister ? 'Создать аккаунт' : 'Вход в AneliMarket'}
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             {isRegister
@@ -107,7 +107,7 @@ export const AuthModal: React.FC = () => {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="ivan@techmarket.kz"
+                placeholder="ivan@anelimarket.kz"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
                 required
               />

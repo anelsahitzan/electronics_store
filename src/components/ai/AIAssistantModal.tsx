@@ -137,7 +137,7 @@ export const AIAssistantModal: React.FC = () => {
             rank: 2,
             matchScore: 92,
             reasons: [
-              'Лидер по продажам и отзывам покупателей TechMarket',
+              'Лидер по продажам и отзывам покупателей AneliMarket',
               'Титановый корпус, 120 Гц и профессиональная съемка 4K ProRes',
             ],
           },
@@ -160,7 +160,7 @@ export const AIAssistantModal: React.FC = () => {
             </div>
             <div>
               <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                AI-Консультант TechMarket
+                AI-Консультант AneliMarket
                 <span className="px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                   GPT-4o Turbo
                 </span>

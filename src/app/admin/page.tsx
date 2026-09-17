@@ -100,7 +100,7 @@ export default function AdminDashboardPage() {
     {
       id: 'u-3',
       name: 'Lawliet (Анель)',
-      email: 'lawliet@techmarket.kz',
+      email: 'lawliet@anelimarket.kz',
       phone: '+7 (777) 900-11-22',
       registeredAt: '10.11.2024',
       ordersCount: 12,
@@ -279,7 +279,7 @@ export default function AdminDashboardPage() {
           </div>
           <div>
             <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Панель Администратора TechMarket
+              Панель Администратора AneliMarket
             </h1>
             <p className="text-xs text-slate-500">
               Управление заказами, товарами, скидками и промокодами (Кызылорда)

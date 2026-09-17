@@ -23,6 +23,7 @@ import {
   Shield,
   LogOut,
 } from 'lucide-react';
+import { CategoryIcon } from '@/components/common/CategoryIcon';
 
 export const Header: React.FC = () => {
   const router = useRouter();
@@ -86,14 +87,14 @@ export const Header: React.FC = () => {
   // Filter products for live search
   const filteredSearchProducts = searchQuery.trim()
     ? products
-        .filter(
-          (p) =>
-            p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            p.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            p.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()))
-        )
-        .slice(0, 5)
+      .filter(
+        (p) =>
+          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+      .slice(0, 5)
     : [];
 
   const popularSearches = ['iPhone 17 Pro', 'MacBook Air M4', 'AirPods Pro', 'Lenovo Legion', 'PlayStation 5'];
@@ -133,11 +134,10 @@ export const Header: React.FC = () => {
                         setSelectedCity(city);
                         setIsCityDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-1.5 text-xs hover:bg-blue-50 dark:hover:bg-slate-700 transition ${
-                        selectedCity === city
+                      className={`w-full text-left px-3 py-1.5 text-xs hover:bg-blue-50 dark:hover:bg-slate-700 transition ${selectedCity === city
                           ? 'font-bold text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-slate-700/50'
                           : 'text-slate-700 dark:text-slate-200'
-                      }`}
+                        }`}
                     >
                       {city}
                     </button>
@@ -180,49 +180,51 @@ export const Header: React.FC = () => {
       </div>
 
       {/* Main Header Bar */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4 sm:gap-6">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/25 group-hover:scale-105 transition">
-            <Zap size={20} className="fill-white" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center">
-              TECH<span className="text-blue-600 dark:text-blue-400">MARKET</span>
-            </span>
-            <span className="text-[9px] uppercase tracking-widest text-slate-400 font-semibold -mt-1 hidden sm:inline">
-              Electronics Store
-            </span>
-          </div>
-        </Link>
+      <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3 sm:gap-5">
+        {/* Left: Brand Logo + Catalog Button Grouped */}
+        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+          {/* Brand Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition">
+              <Zap size={19} className="fill-white" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center">
+                ANELI<span className="text-blue-600 dark:text-blue-400">MARKET</span>
+              </span>
+              <span className="text-[9px] uppercase tracking-widest text-slate-400 font-semibold -mt-1 hidden sm:inline">
+                Electronics Store
+              </span>
+            </div>
+          </Link>
 
-        {/* Catalog Menu Button (Desktop) - Interactive Hover & Click */}
-        <div
-          className="relative hidden md:block"
-          ref={catalogRef}
-          onMouseEnter={handleCatalogMouseEnter}
-          onMouseLeave={handleCatalogMouseLeave}
-        >
-          <button
-            onClick={() => setIsCatalogOpen(!isCatalogOpen)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all shadow-xs select-none ${
-              isCatalogOpen
-                ? 'bg-blue-600 text-white shadow-blue-500/25 ring-2 ring-blue-500/20'
-                : 'bg-blue-600/10 hover:bg-blue-600/20 text-blue-600 dark:text-blue-400 dark:bg-blue-500/10'
-            }`}
-            aria-expanded={isCatalogOpen}
+          {/* Catalog Menu Button (Desktop) */}
+          <div
+            className="relative hidden md:block"
+            ref={catalogRef}
+            onMouseEnter={handleCatalogMouseEnter}
+            onMouseLeave={handleCatalogMouseLeave}
           >
-            {isCatalogOpen ? <X size={18} /> : <Menu size={18} />}
-            <span>Каталог</span>
-            <ChevronDown
-              size={14}
-              className={`transition-transform duration-200 ${isCatalogOpen ? 'rotate-180' : ''}`}
-            />
-          </button>
+            <button
+              onClick={() => setIsCatalogOpen(!isCatalogOpen)}
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-bold text-xs transition-all shadow-2xs select-none ${isCatalogOpen
+                  ? 'bg-blue-600 text-white shadow-blue-500/25 ring-2 ring-blue-500/20'
+                  : 'bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 border border-blue-200/60 dark:border-blue-900/50'
+                }`}
+              aria-expanded={isCatalogOpen}
+            >
+              {isCatalogOpen ? <X size={16} /> : <Menu size={16} />}
+              <span>Каталог</span>
+              <ChevronDown
+                size={13}
+                className={`transition-transform duration-200 ${isCatalogOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+          </div>
         </div>
 
-        {/* Live Search Bar (Desktop) */}
-        <div className="relative flex-1 max-w-2xl hidden md:block" ref={searchRef}>
+        {/* Center: Live Search Bar (Desktop) */}
+        <div className="relative flex-1 max-w-xl hidden md:block" ref={searchRef}>
           <form onSubmit={handleSearchSubmit}>
             <div className="relative flex items-center">
               <input
@@ -234,12 +236,12 @@ export const Header: React.FC = () => {
                 }}
                 onFocus={() => setIsSearchOpen(true)}
                 placeholder="Поиск товаров: например, iPhone 17, MacBook, RTX 4070..."
-                className="w-full pl-10 pr-24 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 transition"
+                className="w-full pl-9 pr-20 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/90 text-slate-900 dark:text-white text-xs focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 transition"
               />
-              <Search className="absolute left-3 text-slate-400" size={18} />
+              <Search className="absolute left-3 text-slate-400" size={16} />
               <button
                 type="submit"
-                className="absolute right-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition"
+                className="absolute right-1 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition shadow-xs"
               >
                 Найти
               </button>
@@ -322,34 +324,34 @@ export const Header: React.FC = () => {
           )}
         </div>
 
-        {/* Right Navigation Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* Right Navigation Actions (Compact & Unified) */}
+        <div className="flex items-center gap-1 sm:gap-1.5">
           {/* Mobile search toggle */}
           <button
             onClick={() => setIsMobileSearchVisible(!isMobileSearchVisible)}
-            className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden transition"
+            className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden transition"
             aria-label="Поиск"
           >
-            <Search size={20} />
+            <Search size={18} />
           </button>
 
           {/* Dark / Light Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+            className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
             aria-label="Сменить тему"
             title={theme === 'dark' ? 'Переключить на светлую' : 'Переключить на темную'}
           >
-            {theme === 'dark' ? <Sun size={19} className="text-amber-400" /> : <Moon size={19} className="text-slate-700" />}
+            {theme === 'dark' ? <Sun size={18} className="text-amber-400" /> : <Moon size={18} className="text-slate-700" />}
           </button>
 
           {/* Comparison Icon (Desktop) */}
           <Link
             href="/compare"
-            className="relative p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition hidden sm:flex"
+            className="relative p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition hidden sm:flex"
             title="Сравнение товаров"
           >
-            <Scale size={19} />
+            <Scale size={18} />
             {comparison.length > 0 && (
               <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
                 {comparison.length}
@@ -360,12 +362,12 @@ export const Header: React.FC = () => {
           {/* Wishlist Icon */}
           <Link
             href="/wishlist"
-            className="relative p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+            className="relative p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
             title="Избранное"
           >
-            <Heart size={19} />
+            <Heart size={18} />
             {wishlist.length > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
                 {wishlist.length}
               </span>
             )}
@@ -374,12 +376,12 @@ export const Header: React.FC = () => {
           {/* Cart Button */}
           <Link
             href="/cart"
-            className="relative flex items-center gap-2 p-2 sm:px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition"
+            className="relative flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/60 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition shadow-2xs"
           >
             <div className="relative">
-              <ShoppingCart size={20} />
+              <ShoppingCart size={18} />
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
+                <span className="absolute -top-1.5 -right-2 w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -508,33 +510,37 @@ export const Header: React.FC = () => {
                 href={`/catalog?category=${cat.slug}`}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition shrink-0 group"
               >
-                <span className="text-sm group-hover:scale-110 transition-transform">{cat.icon}</span>
+                <CategoryIcon
+                  slug={cat.slug}
+                  size={15}
+                  className="text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-110 transition-transform"
+                />
                 <span>{cat.name}</span>
               </Link>
             ))}
           </nav>
 
-          {/* Marketing Highlights (Cleanly Separated on the Right) */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0 border-l border-slate-200 dark:border-slate-800 pl-3">
+          {/* Marketing Highlights (Unified Minimalist Aesthetic) */}
+          <div className="hidden lg:flex items-center gap-1.5 shrink-0 border-l border-slate-200 dark:border-slate-800 pl-3">
             <Link
               href="/catalog?filter=tech-friday"
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 transition border border-rose-200/60 dark:border-rose-900/60"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition border border-slate-200 dark:border-slate-700/60"
             >
-              <Flame size={12} className="fill-rose-500 text-rose-500 animate-pulse" />
+              <Flame size={12} className="text-blue-500 dark:text-blue-400" />
               <span>TECH FRIDAY</span>
             </Link>
             <Link
               href="/promotions"
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/50 transition border border-amber-200/60 dark:border-amber-900/60"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition border border-slate-200 dark:border-slate-700/60"
             >
-              <span className="font-extrabold">%</span>
+              <span className="font-bold text-blue-500 dark:text-blue-400">%</span>
               <span>Акции</span>
             </Link>
             <Link
               href="/catalog?filter=new"
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition border border-blue-200/60 dark:border-blue-900/60"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition border border-slate-200 dark:border-slate-700/60"
             >
-              <Sparkles size={12} />
+              <Sparkles size={12} className="text-blue-500 dark:text-blue-400" />
               <span>Новинки</span>
             </Link>
           </div>

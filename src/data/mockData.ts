@@ -117,6 +117,164 @@ export const INITIAL_CATEGORIES: Category[] = [
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
+    "id": "prod-smartphones-0-apple-iphone-18-pro",
+    "title": "Apple iPhone 18 Pro",
+    "slug": "apple-iphone-18-pro",
+    "brand": "Apple",
+    "category": "Смартфоны",
+    "categorySlug": "smartphones",
+    "price": 699990,
+    "oldPrice": 759990,
+    "discountPercent": 8,
+    "isTechFriday": true,
+    "isHotDeal": true,
+    "isNew": true,
+    "isBestseller": false,
+    "salesCount": 112,
+    "rating": 4.9,
+    "reviewsCount": 18,
+    "mainImage": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=1000&auto=format&fit=crop",
+    "gallery": [
+      "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "colors": [
+      {
+        "name": "Титановый космический",
+        "hex": "#0f172a",
+        "inStock": true
+      },
+      {
+        "name": "Натуральный титан",
+        "hex": "#94a3b8",
+        "inStock": true
+      },
+      {
+        "name": "Глубокий синий сапфир",
+        "hex": "#1e3a8a",
+        "inStock": true
+      }
+    ],
+    "storageOptions": [
+      {
+        "capacity": "256 GB",
+        "priceOffset": 0
+      },
+      {
+        "capacity": "512 GB",
+        "priceOffset": 45000
+      },
+      {
+        "capacity": "1 TB",
+        "priceOffset": 95000
+      }
+    ],
+    "inStock": true,
+    "stockQuantity": 8,
+    "description": "Флагманский смартфон Apple iPhone 18 Pro с революционным чипом Apple A19 Pro Bionic, титановым корпусом нового поколения и перископической камерой с 10x оптическим зумом. Официальная гарантия 1 год, доставка по всему Казахстану и рассрочка 0-0-24 в AneliMarket.",
+    "specs": {
+      "Основные характеристики": {
+        "Бренд": "Apple",
+        "Категория": "Смартфоны",
+        "Модель": "Apple iPhone 18 Pro",
+        "Гарантия": "12 месяцев официальной гарантии"
+      },
+      "Технические параметры": {
+        "Экран / Дисплей": "6.3\" 120Hz ProMotion OLED",
+        "Процессор (CPU)": "Apple A19 Pro",
+        "Оперативная память": "12 GB",
+        "Накопитель": "256 GB"
+      }
+    },
+    "tags": [
+      "смартфоны",
+      "smartphones",
+      "apple",
+      "iphone",
+      "iphone 18",
+      "pro"
+    ],
+    "createdAt": "2026-09-15T10:00:00Z"
+  },
+  {
+    "id": "prod-laptops-0-apple-macbook-air-13-m1",
+    "title": "Apple MacBook Air 13\" M1",
+    "slug": "apple-macbook-air-13-m1",
+    "brand": "Apple",
+    "category": "Ноутбуки",
+    "categorySlug": "laptops",
+    "price": 389990,
+    "oldPrice": 429990,
+    "discountPercent": 9,
+    "isTechFriday": true,
+    "isHotDeal": false,
+    "isNew": false,
+    "isBestseller": true,
+    "salesCount": 340,
+    "rating": 4.9,
+    "reviewsCount": 84,
+    "mainImage": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=1000&auto=format&fit=crop",
+    "gallery": [
+      "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "colors": [
+      {
+        "name": "Space Gray",
+        "hex": "#334155",
+        "inStock": true
+      },
+      {
+        "name": "Silver",
+        "hex": "#e2e8f0",
+        "inStock": true
+      },
+      {
+        "name": "Gold",
+        "hex": "#fcd34d",
+        "inStock": true
+      }
+    ],
+    "storageOptions": [
+      {
+        "capacity": "8 GB / 256 GB",
+        "priceOffset": 0
+      },
+      {
+        "capacity": "16 GB / 512 GB",
+        "priceOffset": 65000
+      }
+    ],
+    "inStock": true,
+    "stockQuantity": 12,
+    "description": "Легендарный Apple MacBook Air 13\" на энергоэффективном чипе Apple M1. Бесшумное охлаждение, до 18 часов работы без подзарядки, дисплей Retina и клавиатура Magic Keyboard. Официальная гарантия 1 год и рассрочка 0-0-24 в AneliMarket.",
+    "specs": {
+      "Основные характеристики": {
+        "Бренд": "Apple",
+        "Категория": "Ноутбуки",
+        "Модель": "Apple MacBook Air 13\" M1",
+        "Гарантия": "12 месяцев официальной гарантии"
+      },
+      "Технические параметры": {
+        "Экран / Дисплей": "13.3\" Retina Display",
+        "Процессор (CPU)": "Apple M1",
+        "Оперативная память": "8 GB",
+        "Накопитель": "256 GB"
+      }
+    },
+    "tags": [
+      "ноутбуки",
+      "laptops",
+      "apple",
+      "macbook",
+      "air",
+      "m1",
+      "13\""
+    ],
+    "createdAt": "2026-09-10T10:00:00Z"
+  },
+  {
     "id": "prod-smartphones-1-apple-iphone-17-pro",
     "title": "Apple iPhone 17 Pro",
     "slug": "apple-iphone-17-pro",
@@ -51996,7 +52154,7 @@ export const INITIAL_REVIEWS: Review[] = [
     author: 'Асель К.',
     rating: 5,
     date: '12 сентября 2026',
-    content: 'Покупала в рассрочку. Все работает молниеносно, дизайн на высоте. Спасибо магазину TechMarket за качественный сервис!',
+    content: 'Покупала в рассрочку. Все работает молниеносно, дизайн на высоте. Спасибо магазину AneliMarket за качественный сервис!',
     isVerifiedPurchase: true,
     likes: 12,
   },
@@ -52044,7 +52202,7 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
 export const INITIAL_USER: User = {
   id: 'usr-lawliet',
   name: 'Lawliet (Анель)',
-  email: 'lawliet@techmarket.kz',
+  email: 'lawliet@anelimarket.kz',
   phone: '+7 (777) 900-11-22',
   role: 'ADMIN',
   registeredAt: '2025-11-10',

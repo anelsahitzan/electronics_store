@@ -14,6 +14,7 @@ import {
   Star,
   Layers,
 } from 'lucide-react';
+import { CategoryIcon } from '@/components/common/CategoryIcon';
 
 interface MegaMenuProps {
   isOpen: boolean;
@@ -128,7 +129,13 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
                   }`}
                 >
                   <div className="flex items-center gap-2.5 truncate">
-                    <span className="text-base shrink-0">{cat.icon}</span>
+                    <span className="shrink-0 flex items-center justify-center w-5 h-5">
+                      <CategoryIcon
+                        slug={cat.slug}
+                        size={17}
+                        className={isActive ? 'text-white' : 'text-blue-600 dark:text-blue-400 group-hover:text-blue-500'}
+                      />
+                    </span>
                     <span className="truncate">{cat.name}</span>
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
@@ -159,8 +166,8 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
               {/* Category Header */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800/80">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/50 flex items-center justify-center text-2xl shadow-xs">
-                    {activeCategory.icon}
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/50 flex items-center justify-center shadow-xs">
+                    <CategoryIcon slug={activeCategory.slug} size={24} className="text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">

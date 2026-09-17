@@ -24,6 +24,9 @@ import {
   INITIAL_USER,
   INITIAL_TECH_FRIDAY,
 } from '@/data/mockData';
+import { KASPI_TOP_PRODUCTS } from '@/data/kaspiTopProducts';
+
+const ALL_INITIAL_PRODUCTS: Product[] = [...KASPI_TOP_PRODUCTS, ...INITIAL_PRODUCTS];
 
 interface StoreContextType {
   // Products & Categories
@@ -122,7 +125,7 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Initialize state from localStorage if available
-  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [products, setProducts] = useState<Product[]>(ALL_INITIAL_PRODUCTS);
   const [categories] = useState<Category[]>(INITIAL_CATEGORIES);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<string[]>(['prod-iphone-17-pro', 'prod-airpods-pro-2']);
@@ -135,7 +138,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
   const [techFriday, setTechFriday] = useState<TechFridaySettings>(INITIAL_TECH_FRIDAY);
   const [selectedCity, setSelectedCity] = useState<string>('Кызылорда');
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [isAuthModalOpen, setAuthModalOpen] = useState(false);
   const [isAIAssistantOpen, setAIAssistantOpen] = useState(false);
   const [cartToast, setCartToast] = useState<{
@@ -156,15 +159,25 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         try {
           const parsed = JSON.parse(savedProducts);
           if (Array.isArray(parsed) && parsed.length >= 500) {
-            setProducts(parsed);
+            const hasKaspi = parsed.some((p: Product) => p.id === 'kaspi-iphone-16-pro-max');
+            if (!hasKaspi) {
+              const combined = [...KASPI_TOP_PRODUCTS, ...parsed];
+              setProducts(combined);
+              localStorage.setItem('tm_products', JSON.stringify(combined));
+            } else {
+              setProducts(parsed);
+            }
           } else {
             // Outdated small catalog cache; replace with full expanded catalog
-            setProducts(INITIAL_PRODUCTS);
-            localStorage.setItem('tm_products', JSON.stringify(INITIAL_PRODUCTS));
+            setProducts(ALL_INITIAL_PRODUCTS);
+            localStorage.setItem('tm_products', JSON.stringify(ALL_INITIAL_PRODUCTS));
           }
         } catch {
-          setProducts(INITIAL_PRODUCTS);
+          setProducts(ALL_INITIAL_PRODUCTS);
         }
+      } else {
+        setProducts(ALL_INITIAL_PRODUCTS);
+        localStorage.setItem('tm_products', JSON.stringify(ALL_INITIAL_PRODUCTS));
       }
 
       const savedCart = localStorage.getItem('tm_cart');
@@ -184,7 +197,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setTheme(savedTheme);
         document.documentElement.classList.toggle('dark', savedTheme === 'dark');
       } else {
-        document.documentElement.classList.add('dark');
+        setTheme('light');
+        document.documentElement.classList.remove('dark');
       }
 
       const savedCity = localStorage.getItem('tm_city');
@@ -252,15 +266,19 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (option) unitPrice += option.priceOffset;
     }
 
+    const maxStock = product.stockQuantity && product.stockQuantity > 0 ? product.stockQuantity : 10;
+
     setCart((prev) => {
       const existing = prev.find((item) => item.id === cartItemId);
       if (existing) {
+        const newQty = Math.min(existing.quantity + quantity, maxStock);
         return prev.map((item) =>
           item.id === cartItemId
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: newQty }
             : item
         );
       } else {
+        const newQty = Math.min(quantity, maxStock);
         return [
           ...prev,
           {
@@ -268,7 +286,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             product,
             selectedColor: chosenColor,
             selectedStorage: chosenStorage,
-            quantity,
+            quantity: newQty,
             unitPrice,
           },
         ];
@@ -289,7 +307,12 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       prev
         .map((item) => {
           if (item.id === itemId) {
+            const maxStock = item.product.stockQuantity && item.product.stockQuantity > 0 ? item.product.stockQuantity : 10;
             const nextQty = item.quantity + delta;
+            // Prevent adding beyond warehouse stock limit
+            if (nextQty > maxStock) {
+              return item;
+            }
             return nextQty > 0 ? { ...item, quantity: nextQty } : null;
           }
           return item;
@@ -398,7 +421,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (currentUser) {
       setCurrentUser({ ...currentUser, role });
     } else {
-      login('lawliet@techmarket.kz', role, 'Lawliet');
+      login('lawliet@anelimarket.kz', role, 'Lawliet');
     }
   };
 

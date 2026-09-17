@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useStore } from '@/context/StoreContext';
 import { ChevronRight } from 'lucide-react';
+import { CategoryIcon } from '@/components/common/CategoryIcon';
 
 export const CategoryGrid: React.FC = () => {
   const { categories } = useStore();
@@ -36,8 +37,8 @@ export const CategoryGrid: React.FC = () => {
             href={`/catalog?category=${category.slug}`}
             className="group flex-shrink-0 w-36 sm:w-44 md:w-auto p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 hover:border-blue-500/50 hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
           >
-            <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800/60 group-hover:bg-blue-600/10 text-2xl flex items-center justify-center mb-2.5 transition transform group-hover:scale-110">
-              {category.icon}
+            <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/40 group-hover:bg-blue-600/10 flex items-center justify-center mb-2.5 transition transform group-hover:scale-110">
+              <CategoryIcon slug={category.slug} size={26} className="text-blue-600 dark:text-blue-400" />
             </div>
             <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition line-clamp-1">
               {category.name}

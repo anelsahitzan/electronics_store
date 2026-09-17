@@ -161,6 +161,8 @@ export interface FilterState {
   techFridayOnly?: boolean;
   hasDiscountOnly?: boolean;
   rating?: number;
+  modelSeries?: string[];
+  processor?: string[];
   ram?: string[];
   storage?: string[];
   diagonal?: string[];

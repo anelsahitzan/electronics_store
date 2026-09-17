@@ -114,22 +114,41 @@ export default function CartPage() {
 
                 {/* Counter & Subtotal */}
                 <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                  <div className="flex items-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-1">
-                    <button
-                      onClick={() => updateCartQuantity(item.id, -1)}
-                      className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 font-bold text-sm"
-                    >
-                      -
-                    </button>
-                    <span className="w-8 text-center font-bold text-xs text-slate-900 dark:text-white">
-                      {item.quantity}
-                    </span>
-                    <button
-                      onClick={() => updateCartQuantity(item.id, 1)}
-                      className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 font-bold text-sm"
-                    >
-                      +
-                    </button>
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="flex items-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-1">
+                      <button
+                        onClick={() => updateCartQuantity(item.id, -1)}
+                        className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 font-bold text-sm cursor-pointer"
+                        aria-label="Уменьшить количество"
+                      >
+                        -
+                      </button>
+                      <span className="w-8 text-center font-bold text-xs text-slate-900 dark:text-white">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateCartQuantity(item.id, 1)}
+                        disabled={item.quantity >= (item.product.stockQuantity || 10)}
+                        className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-sm ${
+                          item.quantity >= (item.product.stockQuantity || 10)
+                            ? 'opacity-30 cursor-not-allowed text-slate-400'
+                            : 'text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 cursor-pointer'
+                        }`}
+                        title={
+                          item.quantity >= (item.product.stockQuantity || 10)
+                            ? `Максимальное количество на складе (${item.product.stockQuantity || 10} шт.)`
+                            : 'Увеличить количество'
+                        }
+                        aria-label="Увеличить количество"
+                      >
+                        +
+                      </button>
+                    </div>
+                    {item.quantity >= (item.product.stockQuantity || 10) && (
+                      <span className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">
+                        Макс. на складе ({item.product.stockQuantity || 10} шт.)
+                      </span>
+                    )}
                   </div>
 
                   <div className="text-right min-w-[100px]">

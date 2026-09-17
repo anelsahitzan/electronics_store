@@ -95,7 +95,7 @@ export default function ProductDetailPage() {
 
     addReview({
       productId: product.id,
-      author: currentUser ? currentUser.name : 'Покупатель TechMarket',
+      author: currentUser ? currentUser.name : 'Покупатель AneliMarket',
       rating: newReviewRating,
       content: newReviewComment.trim(),
       isVerifiedPurchase: true,
@@ -278,12 +278,23 @@ export default function ProductDetailPage() {
 
           {/* Quantity and Add to Cart Buttons */}
           <div className="space-y-3 pt-2">
+            {/* Stock status info */}
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-semibold text-slate-500 dark:text-slate-400">Количество:</span>
+              <span className={`font-bold flex items-center gap-1 ${
+                (product.stockQuantity || 5) <= 3 ? 'text-amber-500' : 'text-emerald-500'
+              }`}>
+                {(product.stockQuantity || 5) <= 3 ? '🔥 Мало на складе:' : '✓ В наличии:'} {product.stockQuantity || 5} шт.
+              </span>
+            </div>
+
             <div className="flex items-center gap-3">
               {/* Quantity counter */}
               <div className="flex items-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-1">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 font-bold transition"
+                  className="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 font-bold transition cursor-pointer"
+                  aria-label="Уменьшить количество"
                 >
                   -
                 </button>
@@ -291,8 +302,15 @@ export default function ProductDetailPage() {
                   {quantity}
                 </span>
                 <button
-                  onClick={() => setQuantity((q) => q + 1)}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 font-bold transition"
+                  onClick={() => setQuantity((q) => Math.min(product.stockQuantity || 5, q + 1))}
+                  disabled={quantity >= (product.stockQuantity || 5)}
+                  className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold transition ${
+                    quantity >= (product.stockQuantity || 5)
+                      ? 'opacity-30 cursor-not-allowed text-slate-400'
+                      : 'text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 cursor-pointer'
+                  }`}
+                  title={quantity >= (product.stockQuantity || 5) ? `Лимит наличия (${product.stockQuantity || 5} шт.)` : 'Увеличить количество'}
+                  aria-label="Увеличить количество"
                 >
                   +
                 </button>

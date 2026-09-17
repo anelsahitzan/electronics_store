@@ -54,14 +54,11 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
       {/* Grid of Product Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product, index) => (
-          <div key={product.id} className="relative">
-            {isBestsellerList && (
-              <div className="absolute top-2 left-2 z-20 w-6 h-6 rounded-full bg-slate-900 dark:bg-slate-800 text-white font-bold text-[11px] flex items-center justify-center border border-slate-700 shadow-sm">
-                #{index + 1}
-              </div>
-            )}
-            <ProductCard product={product} />
-          </div>
+          <ProductCard
+            key={product.id}
+            product={product}
+            rank={isBestsellerList ? index + 1 : undefined}
+          />
         ))}
       </div>
     </section>

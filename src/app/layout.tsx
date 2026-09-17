@@ -20,9 +20,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TechMarket — Интернет-магазин электроники и гаджетов | Кызылорда",
-  description: "Купить смартфоны, ноутбуки, ПК, комплектующие, наушники и технику в Кызылорде с гарантией и рассрочкой 0-0-24. Скидки TECH FRIDAY.",
-  keywords: "TechMarket, Кызылорда электроника, купить iPhone 17, MacBook Air M4, смартфоны, ноутбуки, скидки",
+  title: "AneliMarket — Интернет-магазин электроники и гаджетов | Кызылорда",
+  description: "Купить смартфоны, ноутбуки, ПК, комплектующие, наушники и технику в AneliMarket (Кызылорда) с гарантией и рассрочкой 0-0-24.",
+  keywords: "AneliMarket, АнелиМаркет, Кызылорда электроника, купить iPhone 17, MacBook Air M4, смартфоны, ноутбуки, скидки",
 };
 
 export default function RootLayout({
@@ -33,9 +33,9 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 selection:bg-blue-500 selection:text-white">
+      <body className="min-h-full flex flex-col bg-[#f8f9fa] dark:bg-[#0d111a] text-slate-900 dark:text-slate-100 selection:bg-blue-600 selection:text-white">
         <StoreProvider>
           <Header />
           <main className="flex-1 w-full">{children}</main>
